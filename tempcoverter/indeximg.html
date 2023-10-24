@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather-Based image</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
+    #converter {
+      max-width: 400px;
+      background: transparent;
+      border: 1px solid #fff;
+      background-color: rgba(243, 230, 230, 0.5);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .input-group {
+      margin-bottom: 10px;
+    }
+    .input-group label {
+      display: block;
+      font-weight: bold;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 5px;
+    }
+    .result {
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+    body{
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <div id="converter">
+    <h1>Temperature Converter</h1>
+    <div class="input-group">
+      <label for="temperature">Temperature in Celsius(*C):</label>
+      <input type="number" id="Celsius" placeholder="Enter Temperature">
+    </div>
+    <div class="input-group">
+        <label>Temperature in Fahrenheit(*F)</label>
+        <input type="number" id="Fahrenheit" placeholder="Enter Temperature">
+    </div>
+    <div class="input-group">
+        <label>Temperature in Kelvin(*K)</label>
+        <input type="number" id="Kelvin" placeholder="Enter Temperature">
+    </div>
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+
+let celsius = 
+			document.getElementById('Celsius'); 
+		let fahrenheit = 
+			document.getElementById('Fahrenheit'); 
+		let kelvin = 
+			document.getElementById('Kelvin'); 
+		celsius.oninput = function () { 
+			let f = (parseFloat(Celsius.value) * 9) / 5 + 32; 
+			Fahrenheit.value = parseFloat(f.toFixed(2)); 
+
+			let k = (parseFloat(Celsius.value) + 273.15); 
+			Kelvin.value = parseFloat(k.toFixed(2)); 
+		} 
+		Fahrenheit.oninput = function () { 
+			let c = ((parseFloat( 
+				Fahrenheit.value) - 32) * 5) / 9; 
+			Celsius.value = parseFloat(c.toFixed(2)); 
+
+			let k = (parseFloat( 
+				Fahrenheit.value) - 32) * 5 / 9 + 273.15; 
+			Kelvin.value = parseFloat(k.toFixed(2)); 
+		} 
+		Kelvin.oninput = function () { 
+			let f = (parseFloat( 
+				Kelvin.value) - 273.15) * 9 / 5 + 32; 
+			Fahrenheit.value = parseFloat(f.toFixed(2)); 
+
+			let c = (parseFloat(Kelvin.value) - 273.15); 
+			Celsius.value = parseFloat(c.toFixed(2)); 
+		} 
+
+      
+    const temperatureInput = document.getElementById("Celsius");
+    const temperatureInput1 = document.getElementById("Fahrenheit");
+    const temperatureInput2 = document.getElementById("Kelvin");
+    const resultDiv = document.getElementById("result");
+
+    function updateBackground() {
+      const temperature = parseFloat(temperatureInput.value);
+      const temperature1 = parseFloat(temperatureInput1.value);
+      const temperature2 = parseFloat(temperatureInput2.value);
+
+      // Define image based on the temperature range
+      let backgroundImage;
+    
+
+      if (temperature < 0 ||temperature1<32 ||temperature2<273.15) {
+        backgroundImage ="./img/snow.jpg";
+        
+      }
+      else if (temperature >= 0 && temperature < 10 ||temperature1>=32 && temperature1<50 || temperature2>=273.15 && temperature2<283.15) {
+        backgroundImage = "./img/foggy.jpg";
+      }
+      else if (temperature >= 10 && temperature < 20 ||temperature1>=50 && temperature1<68 || temperature2>=283.15 && temperature2<293.15) {
+        backgroundImage = "./img/rain.jpg";}
+
+      else if (temperature >= 20 && temperature < 25 ||temperature1>=68 && temperature1<77 || temperature2>=293.15 && temperature2<298.15) {
+        backgroundImage = "./img/spring.jpg";
+      } 
+      else if (temperature >= 25 && temperature < 32 ||temperature1>=77 && temperature1<89.6 || temperature2>=298.15 && temperature2<305.15) {
+        backgroundImage = "./img/sunny.jpg";
+      }
+      else if (temperature >= 32 && temperature < 42 ||temperature1>=89.6 && temperature1<107.6 || temperature2>=305.15 && temperature2<315.15) {
+        backgroundImage = "./img/summer.jpg";
+      }
+      else {
+        backgroundImage = "./img/desert.jpg";
+      }
+
+      // Set the background image 
+      document.body.style.backgroundImage = `url(${backgroundImage})`;
+    }
+
+    temperatureInput.addEventListener("input", updateBackground);
+    temperatureInput1.addEventListener("input", updateBackground);
+    temperatureInput2.addEventListener("input", updateBackground);
+
+
+
+  </script>
+</body>
+</html>
